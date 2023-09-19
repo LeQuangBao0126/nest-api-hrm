@@ -26,6 +26,7 @@ export class JobsService {
       startDate,
       endDate,
       isActive,
+      location,
     } = createJobDto;
     let newJob = await this.jobModel.create({
       name,
@@ -35,6 +36,7 @@ export class JobsService {
       quantity,
       level,
       description,
+      location,
       startDate,
       endDate,
       isActive,
@@ -48,10 +50,10 @@ export class JobsService {
   }
 
   async findAll(currentPage: number, limit: number, qs: string) {
-    const { filter, population } = aqp(qs);
+    const { filter, population, sort } = aqp(qs);
     delete filter.current;
     delete filter.pageSize;
-
+    console.log({ filter });
     let offset = (currentPage - 1) * limit;
     let defaultLimit = limit ? limit : 10;
 
@@ -62,7 +64,7 @@ export class JobsService {
       .skip(offset)
       .limit(limit)
       // @ts-ignore: Khong tới
-      // .sort(sort as any)
+      .sort(sort as any)
       .populate({ path: 'company' })
       .exec();
     return {

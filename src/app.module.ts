@@ -13,6 +13,7 @@ import { CompaniesModule } from './companies/companies.module';
 import { AuthController } from './auth/auth.controller';
 import { JobsModule } from './jobs/jobs.module';
 import { FilesModule } from './files/files.module';
+import { ResumesModule } from './resumes/resumes.module';
 
 //'mongodb://localhost:27017/human_resource_mongodb_next',
 @Module({
@@ -36,6 +37,7 @@ import { FilesModule } from './files/files.module';
     CompaniesModule,
     JobsModule,
     FilesModule,
+    ResumesModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService],
