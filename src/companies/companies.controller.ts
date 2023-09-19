@@ -32,6 +32,7 @@ export class CompaniesController {
     //const objId = new mongoose.Types.ObjectId('a');
     return this.companiesService.create(createCompanyDto, user);
   }
+
   @Patch(':id')
   update(
     @Param('id') id: string,
@@ -41,6 +42,7 @@ export class CompaniesController {
     return this.companiesService.update(id, updateCompanyDto, user);
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.companiesService.findOne(id);

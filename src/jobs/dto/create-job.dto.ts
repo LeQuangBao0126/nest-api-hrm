@@ -6,6 +6,7 @@ import {
   IsNumber,
   IsString,
   ValidateNested,
+  isNotEmpty,
 } from 'class-validator';
 
 class Company {
@@ -16,6 +17,9 @@ class Company {
   @IsNotEmpty({ message: 'ten cong ty ko dc rỗng' })
   @IsString()
   name: string;
+
+  @IsNotEmpty({ message: 'Phải có logo công ty' })
+  logo: string;
 }
 export class CreateJobDto {
   @IsNotEmpty({ message: 'Tên job không được rỗng' })
@@ -42,4 +46,7 @@ export class CreateJobDto {
   startDate: string;
   endDate: string;
   isActive: boolean;
+
+  @IsNotEmpty({ message: 'Location khong dc rong' })
+  location: string;
 }
