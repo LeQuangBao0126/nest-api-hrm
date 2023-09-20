@@ -42,7 +42,7 @@ export class AuthService {
     };
     //createRefreshToken
     const refreshToken = this.createRefreshToken(payload);
-    await this.usersService.updateUserToken(refreshToken, _id);
+    await this.usersService.updateUserToken(refreshToken, _id.toString());
 
     response.cookie('refresh_token', refreshToken, {
       httpOnly: true,
@@ -84,7 +84,7 @@ export class AuthService {
       const decoded = this.jwtService.verify<IUser>(refreshToken, { secret });
 
       // user ban
-      const u = await this.usersService.findOne(decoded._id);
+      const u = await this.usersService.findOne(decoded._id.toString());
       if (u.isDeleted) {
         throw new BadRequestException('user is deleted');
       }
@@ -123,7 +123,7 @@ export class AuthService {
   };
 
   logout = async (response: Response, user: IUser) => {
-    await this.usersService.updateUserToken('', user._id);
+    await this.usersService.updateUserToken('', user._id.toString());
     response.clearCookie('refresh_token');
     return 'ok';
   };
